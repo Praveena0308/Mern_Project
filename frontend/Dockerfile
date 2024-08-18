@@ -1,5 +1,5 @@
 # Stage 1: Build the React app
-FROM node:18-alpine AS build
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -9,8 +9,6 @@ ENV NODE_OPTIONS="--max-old-space-size=2048"
 COPY package*.json ./
 RUN npm install
 COPY . .
-
-RUN npm run build
 
 # Stage 2: Serve the React app
 FROM node:18-alpine
