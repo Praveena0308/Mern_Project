@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm install
+RUN npm install --production
 
 # Copy the rest of the application files
 COPY . .
 
-# Expose the backend port
+# Expose the backend port (usually 5000)
 EXPOSE 5000
 
 # Start the backend server
-CMD ["npm", "start"]
+CMD ["node", "index.js"]

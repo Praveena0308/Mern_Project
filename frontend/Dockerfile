@@ -1,25 +1,20 @@
-# Stage 1: Build the React app
+# Use the official Node.js image as a base
 FROM node:18-alpine
 
+# Set the working directory
 WORKDIR /app
 
-# Increase Node.js memory limit
-ENV NODE_OPTIONS="--max-old-space-size=2048"
-
+# Copy the package.json and package-lock.json files
 COPY package*.json ./
+
+# Install the dependencies
 RUN npm install
+
+# Copy the rest of the application files
 COPY . .
 
-# Stage 2: Serve the React app
-FROM node:18-alpine
-
-WORKDIR /app
-
-RUN npm install -g serve
-
-# Copy the build output from the previous stage
-COPY --from=build /app/build ./build
-
+# Expose the frontend port (usually 3000)
 EXPOSE 3000
 
-CMD ["serve", "-s", "build"]
+# Start the React development server
+CMD ["npm", "start"]
