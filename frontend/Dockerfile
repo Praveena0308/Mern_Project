@@ -4,6 +4,9 @@ FROM node:18-alpine
 # Set the working directory
 WORKDIR /app
 
+# Increase Node.js memory limit
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+
 # Copy the package.json and package-lock.json files
 COPY package*.json ./
 
